@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -la $PWD /alx-system_engineering-deops /boots
+ls -la $PWD ../ /boots
