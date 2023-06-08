@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod $(stat -c %a olleh) olleh
+chmod --reference=olleh hello
