@@ -1,4 +1,3 @@
 #!/bin/bash
 if [ "$current_owner" = "abdi" ]
 then chown betty file
-    
