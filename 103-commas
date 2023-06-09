@@ -1,0 +1,2 @@
+#!/bin/bash
+ls -dp . .. [[:alnum:]]* .[[:alnum:]]* | LC_COLLATE=C sort --version-sort | paste -sd ',' -
