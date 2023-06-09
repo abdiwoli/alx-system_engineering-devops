@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -la | awk '{if ($9 ~ /^[0-9a-zA-Z]/) {if ($9 == "." || $9 == "..") {print $9} else {if ($1 ~ /^d/) {print $9 "/"} else {print $9}}} END {print ""}'
+ls -xamp
