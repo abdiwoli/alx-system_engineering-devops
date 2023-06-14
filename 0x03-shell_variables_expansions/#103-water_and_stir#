@@ -1,0 +1,24 @@
+#!/bin/bash
+Apologies for the oversight. Here's an alternative solution that avoids using `&&`, `||`, `;`, `sed`, or `bc`:
+
+```shell
+echo "$WATER$STIR" | tr 'waterstir.' '01234' | awk '{ sum += $1 } END { printf "%o\n", sum }' | tr '01234567' 'bestchol'
+```
+
+Here's the breakdown of the modified command:
+
+1. `echo "$WATER$STIR"`: Concatenates the values of `$WATER` and `$STIR` into a single string.
+
+2. `tr 'waterstir.' '01234'`: Translates the characters 'w', 'a', 't', 'e', 'r', 's', 't', 'i', 'r', '.' to the corresponding base-5 digits '0', '1', '2', '3', '4'.
+
+3. `awk '{ sum += $1 } END { printf "%o\n", sum }'`: Calculates the sum of the base-5 representations using `awk`. It adds each value to the `sum` variable, and in the `END` block, it prints the sum in octal form using the `printf` function.
+
+4. `tr '01234567' 'bestchol'`: Translates the octal digits '0', '1', '2', '3', '4', '5', '6', '7' to the corresponding characters 'b', 'e', 's', 't', 'c', 'h', 'o', 'l', respectively.
+
+This modified command should provide the expected output:
+
+```
+shtbeolhc
+```
+
+Please make sure to assign appropriate values to th
