@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+#prints time
 hour=0
 
 while [ $hour -le 12 ]; do
