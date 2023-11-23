@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 #reads content
-
 if [ -e "/etc/passwd" ]; then
-    awk -F: '{print "Username: " $1, "User ID: " $3, "Home Directory: " $6}' /etc/passwd
+    while IFS=: read -r username _ uid _ _ home _; do
+        echo "$username:$uid:$home"
+    done < "/etc/passwd"
 else
     echo "/etc/passwd file does not exist."
 fi
