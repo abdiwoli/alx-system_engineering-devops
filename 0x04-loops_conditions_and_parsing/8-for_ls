@@ -2,5 +2,11 @@
 #print files
 
 for file in *; do
-    echo "$file"
+    if [ -f "$file" ]; then
+        # Extract the part after the first dash using awk
+        part_after_dash=$(echo "$file" | awk -F'-' '{print $2}')
+        
+        # Display the result
+        echo "$part_after_dash"
+    fi
 done
