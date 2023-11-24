@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#!/usr/bin/env bash
+
+# Start the process
+./8-beheaded_process &
+
+# Wait for a moment to ensure the process is running
+sleep 2
+
+# Find and kill the process named "7-highlander"
+pid=$(pgrep -o 7-highlander)
+
+if [ -n "$pid" ]; then
+  kill -9 "$pid"
+  echo "Process 7-highlander terminated."
+else
+  echo "No process with the name 7-highlander found."
+fi
