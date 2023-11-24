@@ -18,11 +18,9 @@ int infinite_while(void)
  * main - main
  * Return: 0
  */
-
 int main(void)
 {
 	pid_t pid;
-	pid_t pids[5];
 	int i;
 
 	for (i = 0; i < 5; i++)
