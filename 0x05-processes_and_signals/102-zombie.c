@@ -28,8 +28,7 @@ int main(void)
 		pid = fork();
 		if (pid > 0)
 		{
-			printf("Zombie process created, PID: %u\n", getpid());
-			sleep(1);
+			printf("Zombie process created, PID: %u\n", pid);
 		}
 		else
 			exit(1);
