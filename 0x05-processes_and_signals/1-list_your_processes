@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
 #prints process
-ps aux
-pstree
+ps auxf
