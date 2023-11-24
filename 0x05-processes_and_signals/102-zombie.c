@@ -26,8 +26,13 @@ int main(void)
 	for (i = 0; i < 5; i++)
 	{
 		pid = fork();
-		if (pid == 0)
+		if (pid > 0)
+		{
 			printf("Zombie process created, PID: %u\n", getpid());
+			sleep(1);
+		}
+		else
+			exit(1);
 	}
 	infinite_while();
 	return (0);
