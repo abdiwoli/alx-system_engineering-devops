@@ -2,8 +2,8 @@
 # full manage process
 
 if [ "$1" == "start" ]; then
-    ./manage_my_process &  # Start the process in the background
-    echo $! | sudo tee /var/run/my_process.pid  # Store the process ID in the pid file
+    ./manage_my_process &
+    echo $! | sudo tee /var/run/my_process.pid &
     echo "manage_my_process started"
 elif [ "$1" == "stop" ]; then
     kill "$(cat /var/run/my_process.pid)"
@@ -12,8 +12,8 @@ elif [ "$1" == "stop" ]; then
 elif [ "$1" == "restart" ]; then
     kill "$(cat /var/run/my_process.pid)"
     sudo rm -f /var/run/my_process.pid
-    ./manage_my_process &  # Start the process in the background
-    echo $! | sudo tee /var/run/my_process.pid  # Store the process ID in the pid file
+    ./manage_my_process &
+    echo $! > /var/run/my_process.pid
     echo "manage_my_process restarted"
 else
     echo "Usage: manage_my_process {start|stop|restart}"
