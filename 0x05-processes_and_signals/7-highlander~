@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#infinite and sleep
+function signterm_stop
+{
+    echo "I am invincible!!!"
+}
+trap signterm _stop SIGTERM
+
+while true; do
+echo "To infinity and beyond"
+sleep 2
+done
