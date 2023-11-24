@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#grep bash id
+pids=$(pgrep bash)
+for pid in $pids; do
+    process_name=$(ps -p $pid -o comm=)
+    echo "$pid $process_name"
+done
+
