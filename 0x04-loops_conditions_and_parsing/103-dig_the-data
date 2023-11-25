@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 # format
-
 if [ -e "apache-access.log" ]; then
-    # Use awk with IFS set to handle non-printable characters
-    awk -v 'OFS=\t' 'BEGIN {RS="[\t\n]"} {count[$1, $9]++} END {for (key in count) print count[key], key}' "apache-access.log" | sort -nr
+    # Use awk to group by IP and HTTP status code, count occurrences, and format the output
+    awk '{ print $1 " " $9}' apache-access.log | sort | uniq -c | sort -rn
 else
     echo "apache-access.log file does not exist."
 fi
