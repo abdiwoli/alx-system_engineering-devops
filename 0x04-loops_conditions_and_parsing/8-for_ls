@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 #print files
-
-for file in *.*; do
-    if [ -f "$file" ]; then
-        # Extract the part after the first dash using awk
-        part_after_dash=$(echo "$file" | awk -F'-' '{print $2}')
-        
-        # Display the result
-        echo "$part_after_dash"
-    fi
+l=$(ls)
+for file in $l; do
+    echo "$file" | cut -d '-' -f2
 done
