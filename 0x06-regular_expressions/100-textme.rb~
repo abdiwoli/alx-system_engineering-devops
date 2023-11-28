@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+#!/usr/bin/env ruby
+result = ARGV[0].scan(/\[from:(\w{4,15})\]|\+(\d{8,16})|\[flags:(.*?)\]/).flatten.compact.join(" + ")
+
+puts "[#{result}]"
+fr = ARGV[0].scan(/\[from:(\w{4,15})\]/).flatten.join(" ")
+fr += " + " + ARGV[0].scan(/\+\d{8,16}/).join(" ") + " "
+puts fr +  ARGV[0].scan(/\[flags:(.*?)\]/).flatten.join(" ")
+
+
+
