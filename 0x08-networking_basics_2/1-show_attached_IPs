@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+#show active ip
+ip addr | grep -oP 'inet \K[\d.]+'
