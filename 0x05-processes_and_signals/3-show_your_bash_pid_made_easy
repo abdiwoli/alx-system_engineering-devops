@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#grep bash id
+pgrep -l bash

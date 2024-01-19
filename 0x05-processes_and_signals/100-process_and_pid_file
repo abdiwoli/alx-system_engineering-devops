@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Infinite loop with sleep
+
+function sigterm_stop
+{
+    echo "I hate the kill command"
+    sudo rm -f /var/run/myscript.pid
+    exit
+}
+
+function sigquit_stop
+{
+    sudo rm -r /var/run/myscript.pid
+    exit
+}
+
+function sigint_stop
+{
+    echo "Y U no love me?!"
+    exit
+}
+
+# Create PID file
+echo "$$" > /var/run/myscript.pid
+trap '' EXIT
+# Set up signal handlers
+trap sigterm_stop SIGTERM
+trap sigint_stop SIGINT
+trap sigquit_stop SIGQUIT
+
+# Infinite loop
+while true; do
+    echo "To infinity and beyond"
+    sleep 2
+done
