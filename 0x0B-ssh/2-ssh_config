@@ -1,4 +1,4 @@
 # use without password
 Host 18.209.179.248
       PasswordAuthentication no
-      IdentifyFile ~/.ssh/school
+      IdentityFile ~/.ssh/school
