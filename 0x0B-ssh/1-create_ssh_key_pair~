@@ -1,0 +1,3 @@
+#!/usr/bin bash
+#generate pair
+ssh-keygen -f school -N betty -b 4096
