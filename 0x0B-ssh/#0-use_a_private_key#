@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-# Bash script that uses ssh
-sh  ubuntu@18.234.107.0 select 
