@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
 # Bash script that uses ssh
-sh -i ~/.ssh/school: ubuntu@18.234.107.0
-
+sh  ubuntu@18.234.107.0 select 
