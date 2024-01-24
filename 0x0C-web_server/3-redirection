@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Configure and redirect
+sudo apt-get update -y
+sudo apt-get install -y nginx
+
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
+sudo sed -i "/listen 80 default_server;/a rewrite ^/redirect_me https://kalaiibsi.com permanent;" /etc/nginx/sites-enabled/default
+sudo nginx -t && sudo service nginx restart

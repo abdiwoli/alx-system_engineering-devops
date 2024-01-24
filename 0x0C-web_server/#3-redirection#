@@ -1,0 +1,28 @@
+
+
+#!/usr/bin/env bash
+# install ngix
+
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo ufw allow 80
+sudo chown  $USER:$USER /var/www/html/index.nginx-debian.html
+echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html > /dev/null
+
+echo "server {
+    listen 80;
+    server_name _;
+    listen [::]:80 default_server;
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+    location /redirect_me {
+        return 301 http://kalaiibsi.com
+    }
+
+}" | tee /etc/nginx/sites-available/redirect_me > /dev/null
+
+
+ln -s /etc/nginx/sites-available/redirect_me /etc/nginx/sites-enabled/
+
+
+nginx -t && service nginx restart
