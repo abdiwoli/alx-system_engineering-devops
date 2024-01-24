@@ -1,0 +1,12 @@
+echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html > /dev/null
+
+
+#!/usr/bin/env bash
+# install ngix
+
+sudo apt-get -y update
+sudo apt-get -y install ngix
+sudo ufw allow 80
+sudo chown -R $USER:$USER /var/www/html/index.nginx-debian.html
+sudo echo "Hello World!" > /var/www/html/index.nginx-debian.html
+sudo service nginx restart
