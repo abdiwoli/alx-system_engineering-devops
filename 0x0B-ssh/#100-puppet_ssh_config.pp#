@@ -1,5 +1,4 @@
-#100-puppet_ssh_config.pp
-#config
+# 100-puppet_ssh_config.pp
 include stdlib
 
 file_line { 'Turn off passwd auth':
