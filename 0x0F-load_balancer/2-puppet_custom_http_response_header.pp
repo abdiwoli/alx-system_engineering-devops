@@ -28,3 +28,4 @@ file { '/etc/nginx/sites-available/default.erb':
 service { 'nginx':
   ensure => 'running',
 }
+k
