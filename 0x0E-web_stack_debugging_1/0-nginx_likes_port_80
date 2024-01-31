@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#restart
+
+apt-get update
+apt-get install nginx
+service nginx start
