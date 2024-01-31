@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-#restart
-
-apt-get update
-apt-get install nginx
-#sed -i "s/8080/80/g" /etc/nginx/sites-enabled/default
-service nginx start
