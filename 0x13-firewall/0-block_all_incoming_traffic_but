@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+sudo apt-get install --reinstall ufw -y > /dev/null 2>&1
+sudo ufw enable
+sudo ufw allow 22
+sudo ufw allow 80
+sudo ufw allow 443
