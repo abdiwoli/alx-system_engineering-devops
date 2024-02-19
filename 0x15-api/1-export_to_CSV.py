@@ -1,6 +1,8 @@
 #!/usr/bin/python3
+""" module documentation """
 import requests
 import sys
+import csv
 
 
 def get_employee_todo_progress(employee_id):
@@ -21,12 +23,19 @@ def get_employee_todo_progress(employee_id):
     if not todos_data:
         print(f"No TODOs found for {employee_name}.")
         return
-    completed_tasks = [task for task in todos_data if task['completed']]
-    lnt = '{len(todos_data)}'
-    lnc = 'len(completed_tasks)'
-    print(f"Employee {employee_name} is done with tasks (lnc}/{lnt}):")
-    for task in completed_tasks:
-        print(f"\t{task['title']}")
+    tasks = [task for task in todos_data]
+    export_to_csv(employee_id, employee_name, tasks)
+
+
+def export_to_csv(user_id, user_name, completed_tasks):
+    with open(f'{user_id}.csv', 'w', newline='') as csvfile:
+        fieldnames = ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS",
+                      "TASK_TITLE"]
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        for task in completed_tasks:
+            writer.writerow({'USER_ID': str(user_id), 'USERNAME': user_name,
+                             'TASK_COMPLETED_STATUS': task['completed'],
+                             'TASK_TITLE': task['title']})
 
 
 if __name__ == "__main__":
