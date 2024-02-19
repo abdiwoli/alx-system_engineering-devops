@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """ module documentation """
+import csv
 import requests
 import sys
-import csv
 
 
 def get_employee_todo_progress(employee_id):
@@ -33,9 +33,12 @@ def export_to_csv(user_id, user_name, completed_tasks):
                       "TASK_TITLE"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         for task in completed_tasks:
-            writer.writerow({'USER_ID': str(user_id), 'USERNAME': user_name,
-                             'TASK_COMPLETED_STATUS': task['completed'],
-                             'TASK_TITLE': task['title']})
+            writer.writerow({
+                'USER_ID': f'"{user_id}"',
+                'USERNAME': f'"{user_name}"',
+                'TASK_COMPLETED_STATUS': f'"{task["completed"]}"',
+                'TASK_TITLE': f'"{task["title"]}"'
+            })
 
 
 if __name__ == "__main__":
