@@ -11,12 +11,12 @@ def get_employee_todo_progress(employee_id):
     todos_url = f"{base_url}/todos?userId={employee_id}"
     user_response = requests.get(user_url)
     user_data = user_response.json()
+    username = user_data['username']
 
     if not user_data:
         print(f"Employee with ID {employee_id} not found.")
         return
 
-    employee_name = user_data['name']
     todos_response = requests.get(todos_url)
     todos_data = todos_response.json()
 
@@ -24,7 +24,7 @@ def get_employee_todo_progress(employee_id):
         print(f"No TODOs found for {employee_name}.")
         return
     tasks = [task for task in todos_data]
-    export_to_csv(employee_id, employee_name, tasks)
+    export_to_csv(employee_id, username, tasks)
 
 
 def export_to_csv(user_id, user_name, completed_tasks):
