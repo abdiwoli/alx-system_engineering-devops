@@ -29,16 +29,14 @@ def get_employee_todo_progress(employee_id):
 
 def export_to_csv(user_id, user_name, completed_tasks):
     with open(f'{user_id}.csv', 'w', newline='') as csvfile:
-        fieldnames = ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS",
-                      "TASK_TITLE"]
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer = csv.writer(csvfile)
         for task in completed_tasks:
-            writer.writerow({
-                'USER_ID': f'"{user_id}"',
-                'USERNAME': f'"{user_name}"',
-                'TASK_COMPLETED_STATUS': f'"{task["completed"]}"',
-                'TASK_TITLE': f'"{task["title"]}"'
-            })
+             writer.writerow([
+                "{}".format(user_id),
+                "{}".format("user_name"),
+                "{}".format(str(task["completed"])),
+                "{}".format(task["title"])
+            ])
 
 
 if __name__ == "__main__":
