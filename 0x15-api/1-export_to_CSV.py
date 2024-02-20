@@ -1,46 +1,34 @@
 #!/usr/bin/python3
-""" module documentation """
+"""A python script that returns information about an
+employees TODO list progress.
+"""
 import csv
+import json
 import requests
 import sys
 
 
-def get_employee_todo_progress(employee_id):
-    base_url = "https://jsonplaceholder.typicode.com"
-    user_url = f"{base_url}/users/{employee_id}"
-    todos_url = f"{base_url}/todos?userId={employee_id}"
-    user_response = requests.get(user_url)
-    user_data = user_response.json()
-    username = user_data['username']
+def get_todo_info():
+    """A function that gets the todo information for a particular user id"""
+    user_id = sys.argv[1]
+    r = requests.get('https://jsonplaceholder.typicode.com/users?id={}'
+                     .format(user_id))
+    user = json.loads(r.text)
+    user_name = user[0].get('username')
 
-    if not user_data:
-        print(f"Employee with ID {employee_id} not found.")
-        return
+    r = requests.get('https://jsonplaceholder.typicode.com/todos?userId={}'
+                     .format(user_id))
+    todos = json.loads(r.text)
 
-    todos_response = requests.get(todos_url)
-    todos_data = todos_response.json()
-
-    if not todos_data:
-        print(f"No TODOs found for {employee_name}.")
-        return
-    tasks = [task for task in todos_data]
-    export_to_csv(employee_id, username, tasks)
-
-
-def export_to_csv(user_id, user_name, completed_tasks):
-    with open(f'{user_id}.csv', 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        for task in completed_tasks:
-             writer.writerow([
-                "{}".format(user_id),
-                "{}".format("user_name"),
-                "{}".format(str(task["completed"])),
-                "{}".format(task["title"])
-            ])
+    with open('{}.csv'.format(user_id),
+              'w', newline='', encoding='utf-8') as fp:
+        taskwriter = csv.writer(fp, quoting=csv.QUOTE_ALL)
+        for task in todos:
+            taskwriter.writerow(["{}".format(user_id),
+                                 "{}".format(user_name),
+                                 "{}".format(task.get('completed')),
+                                 "{}".format(task.get('title'))])
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python script.py <employee_id>")
-    else:
-        get_employee_todo_progress(int(sys.argv[1]))
+    get_todo_info()
