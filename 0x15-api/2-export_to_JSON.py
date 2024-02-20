@@ -25,7 +25,7 @@ def get_todo_info():
         d[f"{user_id}"].append({"username": user_name, "task": i["title"],
                                 "completed": i["completed"]})
 
-    with open('todo_all_employees.json'.format(user_id),
+    with open('{}.json'.format(user_id),
               'w', newline='', encoding='utf-8') as fp:
         json.dump(d, fp, ensure_ascii=False, separators=(',', ':'))
 
