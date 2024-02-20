@@ -2,8 +2,8 @@
 """A python script that returns information about an
 employees TODO list progress.
 """
-import requests
 import json
+import requests
 
 
 def get_todo_info():
