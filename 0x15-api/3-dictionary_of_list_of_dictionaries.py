@@ -2,10 +2,8 @@
 """A python script that returns information about an
 employees TODO list progress.
 """
-import csv
-import json
 import requests
-import sys
+import json
 
 
 def get_todo_info():
@@ -16,16 +14,23 @@ def get_todo_info():
     r = requests.get('https://jsonplaceholder.typicode.com/todos')
     todos = json.loads(r.text)
     d = {}
-    for i in todos:
-        for user in users:
-            if user["id"] == i["id"]:
-                username = user["username"]
-        d[i["id"]] = []
-        d[i["id"]].append({"username": username, "task": i["title"],
-                           "completed": i["completed"]})
+    did = {}
 
-    with open('todo_all_employees.json',
-              'w', newline='', encoding='utf-8') as fp:
+    for sid in users:
+        user_id = sid["id"]
+        d[user_id] = []
+        did[user_id] = sid["username"]
+
+    for i in todos:
+        user_id = i["userId"]
+        d[user_id].append({
+            "username": did[user_id],
+            "task": i["title"],
+            "completed": i["completed"]
+        })
+
+    with open('todo_all_employees.json', 'w', newline='',
+              encoding='utf-8') as fp:
         json.dump(d, fp, ensure_ascii=False, separators=(',', ':'))
 
 
