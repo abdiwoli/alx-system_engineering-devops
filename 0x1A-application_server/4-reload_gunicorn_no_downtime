@@ -1,9 +1,3 @@
 #!/usr/bin/env bash
 # restart gunicorn
-if pgrep -x "gunicorn" > /dev/null
-then
-    echo "Reloading Gunicorn gracefully..."
-    # Send HUP signal to the Gunicorn master process
-    pkill -HUP gunicorn
-    echo "Gunicorn reloaded gracefully."
-fi
+pkill -HUP gunicorn
