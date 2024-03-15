@@ -10,12 +10,15 @@ def top_ten(subreddit):
     try:
         res = requests.get('https://www.reddit.com/r/' + subreddit + '/hot.json?limit=10', headers=headers, allow_redirects=False)
         subreddit_data = res.json()
-        if 'error' in subreddit_data.keys():
-            print('None')
+
+        if 'data' in subreddit_data and 'children' in subreddit_data['data']:
+            for post in subreddit_data['data']['children']:
+                if 'data' in post and 'title' in post['data']:
+                    print(post['data']['title'])
+                else:
+                    print("Error: Missing 'title' field in post data")
         else:
-            more = subreddit_data['data']['children']
-            for detail in more:
-                print(detail['data']['title'])
+            print("Error: Unexpected data structure in subreddit response")
 
     except Exception as e:
         print('None')
