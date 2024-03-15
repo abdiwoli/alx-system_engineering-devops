@@ -1,3 +1,9 @@
 #!/usr/bin/env bash
 # restart gunicorn
-systemctl status gunicorn-django |  sed -n 's/.*Main PID: \(.*\)$/\1/g p' | cut -f1 -d' ' | xargs kill -HUP
+if pgrep -x "gunicorn" > /dev/null
+then
+    echo "Reloading Gunicorn gracefully..."
+    # Send HUP signal to the Gunicorn master process
+    pkill -HUP gunicorn
+    echo "Gunicorn reloaded gracefully."
+fi
