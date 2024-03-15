@@ -1,16 +1,27 @@
 #!/usr/bin/python3
-""" Module for task 0 """
+""" Module for task 2 """
 import requests
 
 
-def number_of_subscribers(subreddit):
-    """ Queries the Reddit API of the users"""
-    req = requests.get(
-        "https://www.reddit.com/r/{}/about.json".format(subreddit),
-        headers={"User-Agent": "Custom"},
-    )
+def recurse(subreddit, hot_list=[]):
+    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
+    headers = {'User-Agent': 'Mozilla/5.0'}
+    response = requests.get(url, headers=headers, allow_redirects=False)
 
-    if req.status_code == 200:
-        return req.json().get("data").get("subscribers", 0)
+    if response.status_code != 200:
+        return None
+
+    data = response.json()
+    posts = data.get('data', {}).get('children', [])
+
+    if not posts:
+        return hot_list
+
+    for post in posts:
+        title = post.get('data', {}).get('title')
+        hot_list.append(title)
+
+    if data.get('data', {}).get('after'):
+        return recurse(subreddit, hot_list=hot_list)
     else:
-        return 0
+        return hot_list
