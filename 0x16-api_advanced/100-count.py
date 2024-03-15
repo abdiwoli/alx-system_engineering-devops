@@ -21,6 +21,10 @@ def count_words(subreddit, word_list, after=None, counts=None):
     data = response.json()
     posts = data.get('data', {}).get('children', [])
 
+    if not posts:
+        print("Invalid subreddit or no posts match.")
+        return
+
     for post in posts:
         title = post.get('data', {}).get('title', '').lower()
         for word in word_list:
