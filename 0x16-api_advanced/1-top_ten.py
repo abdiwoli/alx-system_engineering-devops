@@ -1,24 +1,27 @@
 #!/usr/bin/python3
-"""hot 10 request"""
+"""" to ten """
 import requests
 
 
 def top_ten(subreddit):
-    """gets the hostest 10 from api"""
+    """gets number of subscribers of a subreddit"""
     headers = {
         'User-Agent': 'My User Agent 1.0',
     }
-    subreddit_data = {}
     try:
         res = requests.get('https://www.reddit.com/r/'+subreddit
                            + '/hot.json?limit=10', headers=headers,
                            allow_redirects=False)
         subreddit_data = res.json()
+        if 'error' in subreddit_data.keys():
+            print('None')
+        else:
+            more = subreddit_data['data']['children']
+            for detail in more:
+                print(detail['data']['title'])
+
+            
+        
     except Exception as e:
         print('None')
-    if 'error' in subreddit_data.keys():
-        print('None')
-    else:
-        more = subreddit_data['data']['children']
-        for m in more:
-            print(m['data']['title'])
+
