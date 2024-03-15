@@ -15,14 +15,12 @@ def count_words(subreddit, word_list, after=None, counts=None):
     response = requests.get(url, headers=headers, allow_redirects=False)
 
     if response.status_code != 200:
-        print("Invalid subreddit or no posts match.")
         return
 
     data = response.json()
     posts = data.get('data', {}).get('children', [])
 
     if not posts:
-        print("Invalid subreddit or no posts match.")
         return
 
     for post in posts:
